@@ -19,7 +19,6 @@ export const ShortedUrl = () => {
         <input
           type="text"
           ref={copyRef}
-          value="https://short.ly/123456"
           readOnly
           className="flex-1 p-3 text-lg border-2 border-indigo-900 rounded-l-xl outline-none"
         />

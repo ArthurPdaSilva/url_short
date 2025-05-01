@@ -1,0 +1,56 @@
+services:
+  database:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "80:80"
+    depends_on:
+      - database
+  redis:
+    image: redis:latest
+    restart: always
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    depends_on:
+      - database
+  nextapp:
+    container_name: nextapp
+    image: nextapp:1.0.0
+    environment:
+      - DATABASE_URL=postgresql://admin:adminpassword@database:5432/mydatabase
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - NEXT_PUBLIC_API_URL=http://app:3000
+    build:
+      context: ./
+      dockerfile: next.dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+      - redis
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
