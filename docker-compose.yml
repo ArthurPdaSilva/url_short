@@ -39,7 +39,7 @@ services:
       - DATABASE_URL=postgresql://admin:adminpassword@database:5432/mydatabase
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - NEXT_PUBLIC_API_URL=http://app:3000
+      - NEXT_PUBLIC_API_URL=http://nextapp:3000
     build:
       context: ./
       dockerfile: next.dockerfile
