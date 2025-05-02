@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔗 url_short - Encurtador de URLs com Next.js
 
-## Getting Started
+Projeto fullstack de encurtador de URLs, desenvolvido com **Next.js**, **Redis**, **PostgreSQL** e **Docker**.
 
-First, run the development server:
+## 📌 Objetivo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Criar uma aplicação simples, rápida e funcional para encurtar URLs com armazenamento em banco de dados e cache, oferecendo redirecionamento eficiente e (opcionalmente) análises básicas.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tecnologias Usadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js (fullstack)** – Backend e frontend integrados.
+- **PostgreSQL** – Armazenamento principal das URLs.
+- **Redis** – Cache para otimizar redirecionamentos.
+- **Docker** – Orquestração dos serviços.
+- **pgAdmin** – Interface web para gerenciamento do PostgreSQL.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧱 Estrutura do Projeto (Docker)
 
-## Learn More
+A aplicação roda com 4 containers:
 
-To learn more about Next.js, take a look at the following resources:
+1. **app**: aplicação Next.js
+2. **postgres**: banco de dados relacional
+3. **redis**: cache para acelerar redirecionamentos
+4. **pgadmin**: painel de controle para o PostgreSQL
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Funcionalidades
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🔗 Criação de URLs curtas únicas
+- 📥 Redirecionamento automático para a URL original
+- 🧠 Cache de redirecionamentos via Redis
+- 🗂 Interface básica para gerenciamento
 
-## Deploy on Vercel
+## 📂 Rotas (API)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `POST /api/shorten`
+Cria uma nova URL encurtada.
+### `GET /api/redirect/[url]`
+Buscar URL original a partir da encurtada.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
